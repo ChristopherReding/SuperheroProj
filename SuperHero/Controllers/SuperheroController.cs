@@ -18,6 +18,7 @@ namespace SuperHero.Controllers
         }
         
         public ActionResult Index()
+        
         {
             var superheroes = _context.Superheroes.ToList();
             return View(superheroes);
