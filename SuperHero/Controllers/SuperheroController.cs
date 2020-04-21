@@ -34,7 +34,7 @@ namespace SuperHero.Controllers
         public ActionResult Create()
         {
             var hero = new Superhero();
-            return View();
+            return View(hero);
         }
         [HttpPost]
         public ActionResult Create(Superhero hero)
@@ -47,13 +47,31 @@ namespace SuperHero.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var hero = _context.Superheroes.Where(m => m.Id == id).SingleOrDefault();
+            return View(hero);
+        }
+        [HttpPost]
+        public ActionResult Edit(Superhero hero)
+        {
+            _context.Superheroes.Update(hero);
+            _context.SaveChanges();
+            return RedirectToAction("index");
         }
 
+        
+        
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            var hero = _context.Superheroes.Where(m => m.Id == id).SingleOrDefault();
+            return View(hero);
+        }
+        [HttpPost]
+        public ActionResult Delete(Superhero hero)
+        {
+            _context.Superheroes.Remove(hero);
+            _context.SaveChanges();
+            return RedirectToAction("index");
         }
                       
         
